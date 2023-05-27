@@ -17,7 +17,7 @@ const Home = () => {
       <hr />
       <ul className="partsList">
         {parts.map(part => (
-          <li key={part.name} onClick={() => setSelectedPart(part.name)}>
+          <li key={part.name} onClick={() => setSelectedPart(part.name)} style={part.name === selectedPart ? {backgroundColor: '#42e9f5'} : {}}>
             {part.name} {part.amount}
             <button
               onClick={e => {
