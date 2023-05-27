@@ -42,15 +42,15 @@ const Home = () => {
       <ul className="partsList">
         {parts.map(part => (
           <li
-            key={part.name}
-            onClick={() => setSelectedPart(part.name)}
-            className={part.name === selectedPart && 'selected'}
+            key={part.name + part.id}
+            onClick={() => setSelectedPart(part.name + part.id)}
+            className={part.name + part.id === selectedPart && 'selected'}
           >
             {part.name} {part.amount}
             <button
               onClick={e => {
                 e.stopPropagation();
-                dispatch(incrementPart(part.name));
+                dispatch(incrementPart(part.name, part.id));
               }}
             >
               +
@@ -58,7 +58,7 @@ const Home = () => {
             <button
               onClick={e => {
                 e.stopPropagation();
-                dispatch(decrementPart(part.name));
+                dispatch(decrementPart(part.name, part.id));
               }}
             >
               -
@@ -70,11 +70,11 @@ const Home = () => {
       <h2>Part Info</h2>
       {selectedPart &&
         (() => {
-          const part = parts.find(x => x.name === selectedPart);
+          const part = parts.find(x => (x.name + x.id) === selectedPart);
           return (
             <PartDescriptor
-              key={part.name}
-              name={part.name}
+              key={part.name + part.id}
+              name={part.id ? `${part.name}--${part.id}` : part.name}
               amount={part.amount}
             />
           );

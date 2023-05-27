@@ -7,7 +7,7 @@ import {
 
 // import { v4 as uuid } from 'uuid'; // missing @types/uuid and not allowed to install modules
 
-const initialState = [
+const initialState: Part[] = [
   {
     name: 'Wheel',
     amount: 0,
@@ -30,7 +30,7 @@ const partsReducer = (state = initialState, action: PartActionType) => {
   switch (action.type) {
     case INCREMENT_PART: {
       return state.map(part => {
-        if (part.name === action.partName) {
+        if (part.name === action.partName && part.id === action.id) {
           return { ...part, amount: part.amount + 1 };
         }
         return part;
@@ -38,23 +38,17 @@ const partsReducer = (state = initialState, action: PartActionType) => {
     }
     case DECREMENT_PART: {
       return state.map(part => {
-        if (part.name === action.partName) {
+        if (part.name === action.partName && part.id === action.id) {
           return { ...part, amount: part.amount - 1 };
         }
         return part;
       });
     }
     case ADD_NEW_PART: {
-      // check if part exists
-      const isDuplicate = state.map(el => el.name).includes(action.partName);
-      // alter entered name if it's a duplicate
-      if (isDuplicate) {
-        const partCode = window.crypto.randomUUID();
-        const newName = `${action.partName}--${partCode}`;
-        return [...state, { name: newName, amount: 0 }];
-      }
-      // add new part to state
-      return [...state, { name: action.partName, amount: 0 }];
+      return [
+        ...state,
+        { name: action.partName, amount: 0, id: window.crypto.randomUUID() },
+      ];
     }
     default:
       return state;
