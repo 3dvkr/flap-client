@@ -3,17 +3,15 @@ import { Dispatch } from 'redux';
 export const INCREMENT_PART = 'local/INCREMENT_PART';
 export const DECREMENT_PART = 'local/DECREMENT_PART';
 
-type IncrementType = typeof INCREMENT_PART;
-type DecrementType = typeof DECREMENT_PART;
-
 interface IncrementPartAction {
-  type: IncrementType;
+  type: typeof INCREMENT_PART;
   partName: string;
 }
 interface DecrementPartAction {
-  type: DecrementType;
+  type: typeof DECREMENT_PART;
   partName: string;
 }
+export type PartActionType = IncrementPartAction | DecrementPartAction;
 
 export const incrementPart = (partName: string): IncrementPartAction =>({
     type: INCREMENT_PART,
