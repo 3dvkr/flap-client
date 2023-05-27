@@ -6,6 +6,27 @@ import { partsSelector } from '../selectors/local';
 
 import './Home.sass';
 
+const PartForm = () => {
+  const [newPartName, setNewPartName] = useState('');
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // console.log({ name: newPartName, amount: 0 });
+  };
+  return (
+    <form onSubmit={submitHandler}>
+      <label htmlFor="newPartName">New Part Name</label>
+      <input
+        id="newPartName"
+        type="text"
+        value={newPartName}
+        onChange={e => setNewPartName(e.target.value)}
+        required
+      />
+      <button>Add Part</button>
+    </form>
+  );
+};
+
 const Home = () => {
   const [selectedPart, setSelectedPart] = useState<string>(null);
   const parts = useSelector(partsSelector);
@@ -15,9 +36,14 @@ const Home = () => {
     <div>
       <h1>Parts Counter</h1>
       <hr />
+      <PartForm />
       <ul className="partsList">
         {parts.map(part => (
-          <li key={part.name} onClick={() => setSelectedPart(part.name)} className={part.name === selectedPart && 'selected'}>
+          <li
+            key={part.name}
+            onClick={() => setSelectedPart(part.name)}
+            className={part.name === selectedPart && 'selected'}
+          >
             {part.name} {part.amount}
             <button
               onClick={e => {
