@@ -5,7 +5,7 @@ import {
   PartActionType,
 } from '../../actions/parts';
 
-// import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid'; // missing @types/uuid and not allowed to install modules
 
 const initialState = [
   {
@@ -45,6 +45,15 @@ const partsReducer = (state = initialState, action: PartActionType) => {
       });
     }
     case ADD_NEW_PART: {
+      // check if part exists
+      const isDuplicate = state.map(el => el.name).includes(action.partName);
+      // alter entered name if it's a duplicate
+      if (isDuplicate) {
+        const partCode = window.crypto.randomUUID();
+        const newName = `${action.partName}--${partCode}`;
+        return [...state, { name: newName, amount: 0 }];
+      }
+      // add new part to state
       return [...state, { name: action.partName, amount: 0 }];
     }
     default:
