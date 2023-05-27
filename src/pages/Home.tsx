@@ -20,14 +20,16 @@ const Home = () => {
           <li key={part.name} onClick={() => setSelectedPart(part.name)}>
             {part.name} {part.amount}
             <button
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation();
                 dispatch(incrementPart(part.name));
               }}
             >
               +
             </button>
             <button
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation();
                 dispatch(decrementPart(part.name));
               }}
             >
@@ -41,7 +43,13 @@ const Home = () => {
       {selectedPart &&
         (() => {
           const part = parts.find(x => x.name === selectedPart);
-          return <PartDescriptor key={part.name} name={part.name} amount={part.amount} />;
+          return (
+            <PartDescriptor
+              key={part.name}
+              name={part.name}
+              amount={part.amount}
+            />
+          );
         })()}
     </div>
   );
