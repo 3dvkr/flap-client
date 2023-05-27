@@ -20,14 +20,14 @@ const Home = () => {
           <li key={part.name} onClick={() => setSelectedPart(part.name)}>
             {part.name} {part.amount}
             <button
-              onClick={e => {
+              onClick={() => {
                 dispatch(incrementPart(part.name));
               }}
             >
               +
             </button>
             <button
-              onClick={e => {
+              onClick={() => {
                 dispatch(decrementPart(part.name));
               }}
             >
