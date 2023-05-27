@@ -29,22 +29,21 @@ const initialState = [
 const partsReducer = (state = initialState, action: PartActionType) => {
   switch (action.type) {
     case INCREMENT_PART: {
-      const idx = state.findIndex(part => part.name === action.partName);
-      const newAmount = state[idx].amount + 1;
-      return state
-        .slice(0, idx)
-        .concat({ name: action.partName, amount: newAmount })
-        .concat(...state.slice(idx + 1));
+      return state.map(part => {
+        if (part.name === action.partName) {
+          return { ...part, amount: part.amount + 1 };
+        }
+        return part;
+      });
     }
     case DECREMENT_PART: {
-      const idx = state.findIndex(part => part.name === action.partName);
-      const newAmount = state[idx].amount - 1;
-      return state
-        .slice(0, idx)
-        .concat({ name: action.partName, amount: newAmount })
-        .concat(...state.slice(idx + 1));
+      return state.map(part => {
+        if (part.name === action.partName) {
+          return { ...part, amount: part.amount - 1 };
+        }
+        return part;
+      });
     }
-
     default:
       return state;
   }
