@@ -1,5 +1,3 @@
-import { Dispatch } from 'redux';
-
 export const INCREMENT_PART = 'local/INCREMENT_PART';
 export const DECREMENT_PART = 'local/DECREMENT_PART';
 
