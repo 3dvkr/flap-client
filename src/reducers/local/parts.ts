@@ -1,4 +1,5 @@
 import {
+  ADD_NEW_PART,
   DECREMENT_PART,
   INCREMENT_PART,
   PartActionType,
@@ -42,6 +43,9 @@ const partsReducer = (state = initialState, action: PartActionType) => {
         }
         return part;
       });
+    }
+    case ADD_NEW_PART: {
+      return [...state, { name: action.partName, amount: 0 }];
     }
     default:
       return state;

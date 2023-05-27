@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PartDescriptor from '../components/PartDescriptor';
-import { decrementPart, incrementPart } from '../actions/parts';
+import { decrementPart, incrementPart, addNewPart } from '../actions/parts';
 import { partsSelector } from '../selectors/local';
 
 import './Home.sass';
 
 const PartForm = () => {
+  const dispatch = useDispatch();
   const [newPartName, setNewPartName] = useState('');
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log({ name: newPartName, amount: 0 });
+    dispatch(addNewPart(newPartName));
+    setNewPartName('');
   };
   return (
     <form onSubmit={submitHandler}>
