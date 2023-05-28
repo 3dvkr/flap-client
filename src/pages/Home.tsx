@@ -1,33 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PartDescriptor from '../components/PartDescriptor';
-import { decrementPart, incrementPart, addNewPart } from '../actions/parts';
+import PartForm from '../components/PartForm';
+import { decrementPart, incrementPart } from '../actions/parts';
 import { partsSelector } from '../selectors/local';
 
 import './Home.sass';
-
-const PartForm = () => {
-  const dispatch = useDispatch();
-  const [newPartName, setNewPartName] = useState('');
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(addNewPart(newPartName));
-    setNewPartName('');
-  };
-  return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="newPartName">New Part Name</label>
-      <input
-        id="newPartName"
-        type="text"
-        value={newPartName}
-        onChange={e => setNewPartName(e.target.value)}
-        required
-      />
-      <button>Add Part</button>
-    </form>
-  );
-};
 
 const Home = () => {
   const [selectedPart, setSelectedPart] = useState<string>(null);
@@ -70,7 +48,7 @@ const Home = () => {
       <h2>Part Info</h2>
       {selectedPart &&
         (() => {
-          const part = parts.find(x => (x.name + x.id) === selectedPart);
+          const part = parts.find(x => x.name + x.id === selectedPart);
           return (
             <PartDescriptor
               key={part.name + part.id}
