@@ -19,7 +19,7 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
+    <Router basename='/flap-client/'>
       <div className="app">
         <ul className="navigator">
           <li>
