@@ -16,47 +16,54 @@ const Home = () => {
     <div>
       <h1>Parts Counter</h1>
       <hr />
-      <PartForm />
-      <ul className="partsList">
-        {parts.map(part => (
-          <li
-            key={part.name + part.id}
-            onClick={() => setSelectedPart(part.name + part.id)}
-            className={part.name + part.id === selectedPart && 'selected'}
-          >
-            {part.name} {part.amount}
-            <button
-              onClick={e => {
-                e.stopPropagation();
-                dispatch(incrementPart(part.name, part.id));
-              }}
-            >
-              +
-            </button>
-            <button
-              onClick={e => {
-                e.stopPropagation();
-                dispatch(decrementPart(part.name, part.id));
-              }}
-            >
-              -
-            </button>
-          </li>
-        ))}
-      </ul>
-      <hr />
-      <h2>Part Info</h2>
-      {selectedPart &&
-        (() => {
-          const part = parts.find(x => x.name + x.id === selectedPart);
-          return (
-            <PartDescriptor
+      <section className="parts">
+        <PartForm />
+        <ul className="partsList">
+          {parts.map(part => (
+            <li
               key={part.name + part.id}
-              name={part.id ? `${part.name}--${part.id}` : part.name}
-              amount={part.amount}
-            />
-          );
-        })()}
+              onClick={() => setSelectedPart(part.name + part.id)}
+              className={part.name + part.id === selectedPart ? 'selected': ''}
+            >
+              <span className="partName">{part.name}</span>
+              <span className="partAmount">{part.amount}</span>
+              <div className="btnControl">
+                <button
+                  onClick={e => {
+                    e.stopPropagation();
+                    dispatch(incrementPart(part.name, part.id));
+                  }}
+                >
+                  +
+                </button>
+                <button
+                  onClick={e => {
+                    e.stopPropagation();
+                    dispatch(decrementPart(part.name, part.id));
+                  }}
+                >
+                  -
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <hr />
+      <section className="part-info">
+        <h2>Part Info</h2>
+        {selectedPart &&
+          (() => {
+            const part = parts.find(x => x.name + x.id === selectedPart);
+            return (
+              <PartDescriptor
+                key={part.name + part.id}
+                name={part.id ? `${part.name}--${part.id}` : part.name}
+                amount={part.amount}
+              />
+            );
+          })()}
+      </section>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewPart } from '../actions/parts';
 
+import './PartForm.sass';
+
 const PartForm = () => {
   const dispatch = useDispatch();
   const [newPartName, setNewPartName] = useState('');
@@ -12,7 +14,7 @@ const PartForm = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="secondary-bg-section">
       <label htmlFor="newPartName">New Part Name</label>
       <input
         id="newPartName"

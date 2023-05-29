@@ -1,5 +1,41 @@
+@import '../App.sass'
+
+// // Variables
+$btn-w: 2.25ch
+
+// // Styles
+section
+    margin-block: 1rem 3rem
+
+form
+    margin-block: 1rem
+
 .partsList
     list-style-type: none
 
-    > .selected 
-        background-color: #42e9f5
+    li
+        display: grid
+        grid-template-columns: max(10ch, 60%) 3fr 2fr
+        padding: 0.5rem 1rem
+
+    button
+        border-radius: 50%
+        background: $dark-blue
+        color: white
+        border: none
+        width: $btn-w
+        height: $btn-w
+        text-align: center
+        font-weight: 700
+
+    .btnControl
+        width: $btn-w * 2.5
+        display: flex
+        justify-content: space-around
+        align-items: center
+    
+    > :nth-child(2n)
+        background-color: $lightest-gray-bg
+    
+    .selected 
+        background-color: $cyan

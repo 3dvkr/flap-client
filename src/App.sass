@@ -1,2 +1,71 @@
-ul.navigator
+@import url(http://fonts.googleapis.com/css?family=Roboto:400italic,700italic,400,700)
+
+// // Variables
+
+// Spacing, etc.
+$radius: 0.25em
+
+// Fonts
+$font-stack: 'Roboto', sans-serif
+$font-size-xxl: 56px
+$font-size-xl: 48px
+$font-size-l: 24px
+$font-size-body: 18px
+$font-size-btn: 1rem
+$line-height: 1.4
+
+// Colors
+$black-strong: #333333
+$black: #303030 
+$dark-blue: #1465c0 
+$lightest-blue-bg: #e3f3fd 
+$lightest-gray-bg: #f6f6f6 
+$cyan: #42e9f5
+
+// // Styles
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+    color: $black
+body
+    font-family: $font-stack
+    font-size: $font-size-body
+    line-height: $line-height
+
+hr
+    color: $lightest-gray-bg
+    width: 50%
+    margin: 0 auto
+
+.app
+    max-width: 70ch
+    margin: 0 auto
+    padding: 0.5rem 1rem
+    box-shadow: 0 0 29px -1px rgba(0,0,0,0.39)
+    min-height: 100vh
+
+h1, h2, h3
+    color: $black-strong
+
+h2, h3
+    padding: 1rem 0 0 1rem
+
+h1
+    font-weight: 700
+    font-size: $font-size-xxl
+    text-align: center
+
+.navigator 
+    margin-top: 0.5rem
     list-style-type: none
+    a
+        padding: 0.4em 0.8em
+        border-radius: $radius
+
+        &:hover
+            background-color: $lightest-blue-bg
+
+.secondary-bg-section
+    background: $lightest-gray-bg
+    padding: 0.5rem 1rem
